@@ -24,7 +24,7 @@ for (let prop in obj) {
 }
 
 // for .... of.. вывводит значения свойства
-
+/*
 function myArray (){
     this.length = 0;
 };
@@ -48,3 +48,23 @@ arrayProto.push = function pop(){
 };
 
 myArray.prototype = arrayProto;
+*/
+
+function myArray(){
+    this.length = 0;
+    this.push(...arguments);
+};
+
+myArray.prototype = {
+    push(){
+        for (let value of arguments){
+            this[this.length++] = value;
+        }
+    },
+    pop(){
+        if(this.length > 0){
+            const res = this[--this.length];
+            delete this[this.length];
+        }
+    },
+};
